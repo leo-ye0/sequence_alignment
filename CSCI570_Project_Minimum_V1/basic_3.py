@@ -20,7 +20,9 @@ def time_wrapper(func, *args, **kwargs):
 
 def process_memory():
     process = psutil.Process()
-    return int(process.memory_info().rss / 1024)
+    memory_info = process.memory_info()
+    memory_consumed = int(memory_info.rss/1024)
+    return memory_consumed
 
 
 def generate_string(s, idxs):
@@ -102,9 +104,8 @@ if __name__ == '__main__':
     str1 = generate_string(s1, idx1)
     str2 = generate_string(s2, idx2)
 
-    mem_before = process_memory()
     time_ms, (cost, a1, a2) = time_wrapper(sequence_alignment, str1, str2)
-    mem_after = process_memory()
+    memory_consumed = process_memory()
 
     with open(sys.argv[2], 'w') as f:
-        f.write(f"{cost}\n{a1}\n{a2}\n{time_ms:.4f}\n{mem_after - mem_before}\n")
+        f.write(f"{cost}\n{a1}\n{a2}\n{time_ms:.4f}\n{memory_consumed}\n")
