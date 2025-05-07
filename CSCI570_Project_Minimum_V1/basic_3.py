@@ -70,14 +70,28 @@ def sequence_alignment(s1, s2):
     i, j = m, n
     while i > 0 and j > 0:
         if dp[i][j] == dp[i-1][j-1] + ALPHA[s1[i-1]][s2[j-1]]:
-            a1.append(s1[i-1]); a2.append(s2[j-1]); i-=1; j-=1
+            a1.append(s1[i-1])
+            a2.append(s2[j-1])
+            i -= 1
+            j -= 1
         elif dp[i][j] == dp[i][j-1] + DELTA:
-            a1.append('_'); a2.append(s2[j-1]); j-=1
+            a1.append('_')
+            a2.append(s2[j-1])
+            j -= 1
         else:
-            a1.append(s1[i-1]); a2.append('_'); i-=1
-    
-    while i > 0: a1.append(s1[i-1]); a2.append('_'); i-=1
-    while j > 0: a1.append('_'); a2.append(s2[j-1]); j-=1
+            a1.append(s1[i-1])
+            a2.append('_')
+            i -= 1
+
+    while i > 0:
+        a1.append(s1[i-1])
+        a2.append('_')
+        i -= 1
+
+    while j > 0:
+        a1.append('_')
+        a2.append(s2[j-1])
+        j -= 1
     
     return dp[m][n], ''.join(reversed(a1)), ''.join(reversed(a2))
 
