@@ -108,4 +108,4 @@ if __name__ == '__main__':
     memory_consumed = process_memory()
 
     with open(sys.argv[2], 'w') as f:
-        f.write(f"{cost}\n{a1}\n{a2}\n{time_ms:.4f}\n{memory_consumed}\n")
+        f.write(f"{cost}\n{a1}\n{a2}\n{time_ms:.4f}\n{memory_consumed}")
